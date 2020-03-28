@@ -20,8 +20,8 @@ If a latch is unlocked, assigned a value, then locked, if you unlock that latch,
 
 The input is a special latch that is only unlocked whenever a line of input is entered. If there are no more inputs, all threads using this latch will always be locked. The name of the input latch is simply referred to as `input`.
 
-## Garbage collection [todo]
-(Considering that writing Sidex can be unintuitive, Sidex implements a terrible garbage collection system.)
+## Garbage collection
+(Considering that writing Sidex can potentially be unhalting, Sidex implements a terrible garbage collection system.)
 
 In order to make sure that scripts are running at the optimal speed, Sidex will delete the process that consumes the most resources after every step. However, if two processes use an equal amount of resources, both of then will be deleted. Deleted threads will no longer exist in the source code, therefore they won't be executed anymore.
 
@@ -59,7 +59,11 @@ open("O" + "P" + "E" + "N")
 ### Who Goes There
 ```
 print("Halt!
-Who goes there?")
+Who goes there?"+0)
+# Resources: 8. Addition with a string implements slicing, just like in C.
 print("You may pass, ${input}")
+# Resources: 8
 # This employs string interpolation inside strings.
+
+# At the end of both lines, they are both collected away as garbage.
 ```
