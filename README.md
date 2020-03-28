@@ -34,24 +34,32 @@ All of the functions take one single operand. These functions can nest.
 ## Example programs
 ### Collatz sequence for 1 iteration
 ```
-open("S" + "${n % 2}") # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
-                     # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
+# Comments have to start with a new line.
+open("S" + "${n % 2}")
+# Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
+# Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
 
-                     # You can't concatenate a string with an integer.
+# You can't concatenate a string with an integer.
 
-S0 + 3 * n + 1 -> n  # If that isn't unlocked.
-S1 + n / 2     -> n  # Likewise, this execution is also conditional.
+S0 + 3 * n + 1 -> n
+# If that isn't unlocked.
+S1 + n / 2     -> n
+# Likewise, this execution is also conditional.
 
-close("S0") # Won't execute if S0 is already closed
-close("S1") # Won't execute if S1 is already closed
+close("S0")
+# Won't execute if S0 is already closed
+close("S1")
+# Won't execute if S1 is already closed
 
 assert(n != 1)
 
-open("O" + "P" + "E" + "N") # We need to make sure that this goes on for at least 1 iteration.
+open("O" + "P" + "E" + "N")
+# We need to make sure that this goes on for at least 1 iteration.
 ```
 ### Who Goes There
 ```
 print("Halt!
 Who goes there?")
-print("You may pass, ${input}") # This employs string interpolation inside strings.
+print("You may pass, ${input}")
+# This employs string interpolation inside strings.
 ```
