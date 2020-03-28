@@ -34,7 +34,7 @@ All of the functions take one operand.
 ## Example programs
 ### Collatz sequence for 1 iteration
 ```
-open("S" concat "${n % 2}") # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
+open("S" + "${n % 2}") # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
                      # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
 
                      # You can't concatenate a string with an integer.
@@ -47,7 +47,7 @@ close("S1") # Won't execute if S1 is already closed
 
 assert(n != 1)
 
-open("O" concat "P" concat "E" concat "N") # We need to make sure that this goes on for at least 1 iteration.
+open("O" + "P" + "E" + "N") # We need to make sure that this goes on for at least 1 iteration.
 ```
 ### Who Goes There
 ```
