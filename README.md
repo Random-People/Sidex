@@ -27,7 +27,7 @@ In order to make sure that scripts are running at the optimal speed, Sidex will 
 
 The number of resources consumed of a process is counted as the number of lexical items in that line of process. String interpolation also count as separate items.
 ## Function reference
-All of the functions take one operand.
+All of the functions take one single operand. These functions can nest.
 * <code>open()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
 
 ## Operator reference
