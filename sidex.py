@@ -1,5 +1,9 @@
 import traceback
 
+import keyword
+# We don't want any Python keywords appearing
+# in a Sidex program.
+
 import sys, random
 
 code = open(sys.argv[1]).read()
@@ -13,6 +17,9 @@ for i in code:
 		continue
 	if i[0] != "#":
 		out.append(i)
+	for j in keyword.kwlist:
+		if j in i:
+			raise(SyntaxError) # Refuse to interpret 
 
 code = out
 
