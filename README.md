@@ -1,3 +1,5 @@
+WARNING. The current interpreter doesn't yet implement the wrapping infinite loop and the garbage collection.
+
 ## Sidex [unimplemented]
 This post aims to be the only practical language in this thread. (That means it isn't as hard to write in as the esolangs, but it's still challenging given that you are new to the language. I'll *try* to write an interpreter if I have time.)
 
