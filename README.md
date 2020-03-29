@@ -1,4 +1,4 @@
-## [Sidex](https://github.com/A-ee/Sidex) [minimally implemented]
+## [Sidex](https://github.com/A-ee/Sidex)
 This post aims to be the only practical language in this thread. (That means it isn't as hard to write in as the esolangs, but it's still challenging given that you are new to the language. I'll *try* to write an interpreter if I have time.)
 
 Sidex is a **practical** language (feel free to disagree on that) with a primary focus on concurrency. On every iteration, Sidex tries to execute every line at a random order. It will halt (as well as outputting the global variable scheme) only if it fails, or a halting thread(i.e. line) is executed. The filename extension is `.six`.
@@ -87,10 +87,8 @@ print(S1+n)
 ```
 print("Halt!\nWho goes there?")
 print("You may pass, "+read+00)
-# Addition with a string implements slicing, just like in C.
-# This employs string interpolation inside strings.
 
-# At the end of both lines, they are both collected away as garbage.
+# On the next iteration the latch "read" is undefined, therefore it halts.
 ```
 ### Count up by 1s
 ```
