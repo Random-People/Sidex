@@ -1,4 +1,6 @@
-import sys, re, random
+import traceback
+
+import sys, random
 
 code = open(sys.argv[1]).read()
 
@@ -15,5 +17,21 @@ for i in code:
 code = out
 
 # Executing in random order!
+# For every iteration, it tries to execute
+# every single instruction.
+
 random.shuffle(code)
-print("\n".join(code))
+
+# Implements a single cycle without garbage collection
+
+while code != []:
+	try:
+		print(code[0])
+		exec(code[0])
+		del code[0]
+	except NameError as e: # Undefined latch
+		code.append(code.pop())
+		undef = str(e).split("'")[1]
+		if undef == "read":
+			pass
+	
