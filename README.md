@@ -47,6 +47,9 @@ All of the functions take one single operand. These functions can nest.
 ```
 n := read
 # Comments have to start with a new line.
+print(n)
+# This can happen at any time ...
+
 unlock("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
 # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
