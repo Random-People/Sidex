@@ -1,6 +1,4 @@
-WARNING. The current interpreter doesn't yet implement the wrapping infinite loop and the garbage collection.
-
-## Sidex [unimplemented]
+## [Sidex](https://github.com/A-ee/Sidex) [minimally implemented]
 This post aims to be the only practical language in this thread. (That means it isn't as hard to write in as the esolangs, but it's still challenging given that you are new to the language. I'll *try* to write an interpreter if I have time.)
 
 Sidex is a domain-specific **practical** language (feel free to disagree on that) with a primary focus on concurrency. On every iteration, Sidex tries to execute every line at a random order. It will halt (as well as outputting the global variable scheme) only if it fails, or a halting thread(i.e. line) is executed. The filename extension is `.six`.
@@ -31,7 +29,7 @@ The number of resources consumed of a process is counted as the number of non-wh
 ## Function reference
 All of the functions take one single operand. These functions can nest.
 
-* <code>open()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
+* <code>lopen()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
 * <code>print()</code> Prints the body expression to STDOUT.
 * <code>read</code> A latch that is only unlocked right after a line of input is executed.
 * <code>str()</code> converts the number to a string.
@@ -41,15 +39,15 @@ All of the functions take one single operand. These functions can nest.
 ### Collatz sequence for 1 iteration
 ```
 # Comments have to start with a new line.
-open("S" + str(n % 2))
+lopen("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
 # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
 
 # You can't concatenate a string with an integer.
 
-n <- S0 + 3 * n + 1
+n = S0 + 3 * n + 1
 # If that isn't unlocked.
-n <- S1 + n / 2
+n = S1 + n / 2
 # Likewise, this execution is also conditional.
 
 close("S0")
@@ -57,9 +55,7 @@ close("S0")
 close("S1")
 # Won't execute if S1 is already closed
 
-assert(n != 1)
-
-open("O" + "P" + "E" + "N")
+lopen("O" + "P" + "E" + "N")
 # We need to make sure that this goes on for at least 1 iteration.
 ```
 ### Who Goes There
