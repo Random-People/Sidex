@@ -28,6 +28,7 @@ The number of resources consumed of a process is counted as the number of non-wh
 All of the functions take one single operand. These functions can nest.
 
 * <code>unlock()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
+* <code>lock()</code> Opposite of `unlock()`. It tries to close the latch that is specified in the string.
 * <code>print()</code> Prints the body expression to STDOUT.
 * <code>read</code> A latch that is only unlocked right after a line of input is executed.
 * <code>str()</code> converts the number to a string.
@@ -40,9 +41,11 @@ All of the functions take one single operand. These functions can nest.
 * <code>/</code>
 * <code>%</code>
 * <code>=</code> Opens a latch if it isn't open (latches are initially of the value 1); Assign the value to the latch.
+* <code>:=</code> If there is already a value in the latch, do nothing. Otherwise, assign the operand to the latch.
 ## Example programs
 ### Collatz sequence for 1 iteration
 ```
+n := read
 # Comments have to start with a new line.
 unlock("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
@@ -55,9 +58,9 @@ n = S0 + 3 * n + 1
 n = S1 + n / 2
 # Likewise, this execution is also conditional.
 
-close("S0")
+lock("S0")
 # Won't execute if S0 is already closed
-close("S1")
+lock("S1")
 # Won't execute if S1 is already closed
 
 unlock("O" + "P" + "E" + "N")
@@ -78,5 +81,5 @@ print("You may pass, "+read)
 thread("1+1"*100)
 I = I + 1
 print(I)
-lclose("I")
+lock("I")
 ```
