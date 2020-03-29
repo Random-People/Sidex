@@ -1,14 +1,12 @@
 ## [Sidex](https://github.com/A-ee/Sidex) [minimally implemented]
 This post aims to be the only practical language in this thread. (That means it isn't as hard to write in as the esolangs, but it's still challenging given that you are new to the language. I'll *try* to write an interpreter if I have time.)
 
-Sidex is a domain-specific **practical** language (feel free to disagree on that) with a primary focus on concurrency. On every iteration, Sidex tries to execute every line at a random order. It will halt (as well as outputting the global variable scheme) only if it fails, or a halting thread(i.e. line) is executed. The filename extension is `.six`.
+Sidex is a **practical** language (feel free to disagree on that) with a primary focus on concurrency. On every iteration, Sidex tries to execute every line at a random order. It will halt (as well as outputting the global variable scheme) only if it fails, or a halting thread(i.e. line) is executed. The filename extension is `.six`.
 
 ## Execution
 Sidex is quite similar to [Whenever](https://www.dangermouse.net/esoteric/whenever.html). However, Sidex does not have clauses specifying executing a line conditionally.
 
-In Sidex, every line of code executes at a random order. However, if two lines are connected with an unterminated string, they are not executed at a different order. Instead, these two lines still act as just one line and are connected together.
-
-Sidex doesn't have any control flow other than an implicitly-wrapped infinite loop; instead, the only form of sequential control flow isn't sequential; they might execute at any order. As a complement, the whole program is wrapped in an infinite loop.
+Sidex doesn't have any control flow other than an implicitly-wrapped infinite loop; instead, the only form of sequential control flow isn't sequential; they might execute at any order.
 
 ## Latches
 
@@ -29,17 +27,24 @@ The number of resources consumed of a process is counted as the number of non-wh
 ## Function reference
 All of the functions take one single operand. These functions can nest.
 
-* <code>lopen()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
+* <code>unlock()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
 * <code>print()</code> Prints the body expression to STDOUT.
 * <code>read</code> A latch that is only unlocked right after a line of input is executed.
 * <code>str()</code> converts the number to a string.
+* <code>thread()</code> appends a new thread to the source code.
 
 ## Operator reference
+* <code>+</code>
+* <code>-</code>
+* <code>*</code>
+* <code>/</code>
+* <code>%</code>
+* <code>=</code> Opens a latch if it isn't open (latches are initially of the value 1); Assign the value to the latch.
 ## Example programs
 ### Collatz sequence for 1 iteration
 ```
 # Comments have to start with a new line.
-lopen("S" + str(n % 2))
+unlock("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
 # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
 
@@ -55,7 +60,7 @@ close("S0")
 close("S1")
 # Won't execute if S1 is already closed
 
-lopen("O" + "P" + "E" + "N")
+unlock("O" + "P" + "E" + "N")
 # We need to make sure that this goes on for at least 1 iteration.
 ```
 ### Who Goes There
@@ -67,4 +72,11 @@ print("You may pass, "+read)
 # This employs string interpolation inside strings.
 
 # At the end of both lines, they are both collected away as garbage.
+```
+### Count up by 1s
+```
+thread("1+1"*100)
+I = I + 1
+print(I)
+lclose("I")
 ```
