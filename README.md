@@ -1,4 +1,4 @@
-## Sidex
+## Sidex [unimplemented]
 This post aims to be the only practical language in this thread. (That means it isn't as hard to write in as the esolangs, but it's still challenging given that you are new to the language. I'll *try* to write an interpreter if I have time.)
 
 Sidex is a domain-specific **practical** language (feel free to disagree on that) with a primary focus on concurrency. On every iteration, Sidex tries to execute every line at a random order. It will halt (as well as outputting the global variable scheme) only if it fails, or a halting thread(i.e. line) is executed. The filename extension is `.six`.
@@ -25,7 +25,7 @@ The input is a special latch that is only unlocked whenever a line of input is e
 
 In order to make sure that scripts are running at the optimal speed, Sidex will delete the process that consumes the most resources after every step. However, if two processes use an equal amount of resources, both of then will be deleted. Deleted threads will no longer exist in the source code, therefore they won't be executed anymore.
 
-The number of resources consumed of a process is counted as the number of lexical items in that line of process. String interpolation also count as separate items.
+The number of resources consumed of a process is counted as the number of non-whitespace bytes in a line.
 ## Function reference
 All of the functions take one single operand. These functions can nest.
 * <code>open()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
@@ -58,8 +58,7 @@ open("O" + "P" + "E" + "N")
 ```
 ### Who Goes There
 ```
-print("Halt!
-Who goes there?"+0)
+print("Halt!\nWho goes there?"+0)
 # Resources: 8. Addition with a string implements slicing, just like in C.
 print("You may pass, ${input}")
 # Resources: 8
