@@ -43,12 +43,13 @@ All of the functions take one single operand. These functions can nest.
 * <code>=</code> Opens a latch if it isn't open (latches are initially of the value 1); Assign the value to the latch.
 * <code>:=</code> If there is already a value in the latch, do nothing. Otherwise, assign the operand to the latch.
 ## Example programs
-### Collatz sequence for 1 iteration
+### Collatz sequence
 ```
+thread("1+1"*100)
+# Add a thread to prevent garbage collection from collecting away the main processes
+
 n := read
 # Comments have to start with a new line.
-print(n)
-# This can happen at any time ...
 
 unlock("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
@@ -61,20 +62,32 @@ n = S0 + 3 * n + 1
 n = S1 + n / 2
 # Likewise, this execution is also conditional.
 
+print(S0 + n)
+print(S1 + n)
+# n is either even or odd, so this will happen after the S. latch is unlocked.
+
 lock("S0")
 # Won't execute if S0 is already closed
 lock("S1")
 # Won't execute if S1 is already closed
 
-unlock("O" + "P" + "E" + "N")
-# We need to make sure that this goes on for at least 1 iteration.
+# Sidex automatically locks all latches at the end of an iteration.
+```
+(Compressed:)
+```
+thread("1+1"*100)
+n:=read
+unlock("S"+str(n % 2))
+n=S0+3*n+1
+n=S1+n/2
+print(S0+n)
+print(S1+n)
 ```
 ### Who Goes There
 ```
-print("Halt!\nWho goes there?"+0)
-# Resources: 8. Addition with a string implements slicing, just like in C.
-print("You may pass, "+read)
-# Resources: 8
+print("Halt!\nWho goes there?")
+print("You may pass, "+read+00)
+# Addition with a string implements slicing, just like in C.
 # This employs string interpolation inside strings.
 
 # At the end of both lines, they are both collected away as garbage.
