@@ -28,22 +28,26 @@ In order to make sure that scripts are running at the optimal speed, Sidex will 
 The number of resources consumed of a process is counted as the number of non-whitespace bytes in a line.
 ## Function reference
 All of the functions take one single operand. These functions can nest.
+
 * <code>open()</code> Takes a single string as an operand. It tries to open the latch that is specified in the string.
+* <code>print()</code> Prints the body expression to STDOUT.
+* <code>read</code> A latch that is only unlocked right after a line of input is executed.
+* <code>str()</code> converts the number to a string.
 
 ## Operator reference
 ## Example programs
 ### Collatz sequence for 1 iteration
 ```
 # Comments have to start with a new line.
-open("S" + "${n % 2}")
+open("S" + str(n % 2))
 # Resources: 15. [open, (, ", S, ", concat, ", $, {, n, %, 2, }, ", )].
 # Usually every symbol is a lexical item, unless that is an identifier, a number, or part of a string.
 
 # You can't concatenate a string with an integer.
 
-S0 + 3 * n + 1 -> n
+n <- S0 + 3 * n + 1
 # If that isn't unlocked.
-S1 + n / 2     -> n
+n <- S1 + n / 2
 # Likewise, this execution is also conditional.
 
 close("S0")
@@ -60,7 +64,7 @@ open("O" + "P" + "E" + "N")
 ```
 print("Halt!\nWho goes there?"+0)
 # Resources: 8. Addition with a string implements slicing, just like in C.
-print("You may pass, ${input}")
+print("You may pass, "+read)
 # Resources: 8
 # This employs string interpolation inside strings.
 
