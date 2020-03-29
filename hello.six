@@ -1,2 +1,4 @@
 print("Halt!\nWho goes there?")
+print("You may wass, "+read)
 print("You may pass, "+read)
+print("It's nice if you entered your name first.")
