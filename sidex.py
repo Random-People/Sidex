@@ -26,12 +26,18 @@ random.shuffle(code)
 
 while code != []:
 	try:
-		print(code[0])
+		# print(code)
 		exec(code[0])
 		del code[0]
 	except NameError as e: # Undefined latch
-		code.append(code.pop())
+		if code[0][-4:]!="#ERR":
+			code[0]+="#ERR" # Memoize the error
+			x = code[0]
+			del code[0]
+			code.append(x)
+			continue
+		# print(code)
 		undef = str(e).split("'")[1]
 		if undef == "read":
-			pass
+			read = input()
 	
